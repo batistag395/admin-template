@@ -57,11 +57,8 @@ export function AuthProvider(props){
         const resposta = await firebase.auth().signInWithPopup(
             new firebase.auth.GoogleAuthProvider()
         )
-        if(resposta.user?.email){
-            const usuario = await usuarioNormalizado(resposta.user)
-            setUsuario(usuario)
-            route.push('/')
-        }
+        configurarSessao(resposta.user)
+        route.push('/')
     }
     return (
         <AuthContext.Provider value ={{
